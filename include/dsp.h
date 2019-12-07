@@ -43,9 +43,13 @@ inline itpp::cvec fshift(const itpp::cvec &seq,const double f,const double fs) {
   const uint32 len=length(seq);
   itpp::cvec r(len);
   std::complex<double>coeff;
+  double cr=0.0;
+  double ci=0.0;
   for (uint32 t=0;t<len;t++) {
-    coeff.real()=cos(k*t);
-    coeff.imag()=sin(k*t);
+    cr=cos(k*t);
+    ci=sin(k*t);
+    coeff.real(cr);
+    coeff.imag(ci);
     //r(t)=seq(t)*exp(k*((double)t));
     r(t)=seq(t)*coeff;
   }
@@ -60,9 +64,13 @@ inline void fshift_inplace(itpp::cvec &seq,const double f,const double fs) {
   double k=itpp::pi*f/(fs/2);
   const uint32 len=length(seq);
   std::complex<double>coeff;
+  double cr=0.0;
+  double ci=0.0;
   for (uint32 t=0;t<len;t++) {
-    coeff.real()=cos(k*t);
-    coeff.imag()=sin(k*t);
+    cr=cos(k*t);
+    ci=sin(k*t);
+    coeff.real(cr);;
+    coeff.imag(ci);;
     //r(t)=seq(t)*exp(k*((double)t));
     seq(t)*=coeff;
   }
